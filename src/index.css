@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+:root {
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-mono:    'DM Mono', monospace;
+
+  --color-bg:           #08080a;
+  --color-surface:      #0f0f12;
+  --color-surface-2:    #161619;
+  --color-border:       #222226;
+  --color-text:         #e4e4e7;
+  --color-text-muted:   #71717a;
+  --color-accent:       #f59e0b;
+  --color-accent-dim:   rgba(245,158,11,0.1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle grid background */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(245,158,11,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245,158,11,0.02) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#root { position: relative; z-index: 1; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #27272a; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+
+/* Message slide-up */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+.message-enter { animation: slideUp 0.18s ease-out forwards; }
+
+/* Prose overrides */
+.prose-invert code::before,
+.prose-invert code::after { content: none !important; }
+
+.prose-invert pre code {
+  background: transparent !important;
+  padding: 0 !important;
+  color: #d4d4d8 !important;
+}
